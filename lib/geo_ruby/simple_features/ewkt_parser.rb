@@ -6,6 +6,11 @@ require 'geo_ruby/simple_features/multi_point'
 require 'geo_ruby/simple_features/multi_line_string'
 require 'geo_ruby/simple_features/multi_polygon'
 require 'geo_ruby/simple_features/geometry_collection'
+require 'geo_ruby/sql_mm/circular_string'
+require 'geo_ruby/sql_mm/compound_curve'
+require 'geo_ruby/sql_mm/curve_polygon'
+require 'geo_ruby/sql_mm/multi_curve'
+require 'geo_ruby/sql_mm/multi_surface'
 
 require 'strscan'
 
@@ -36,7 +41,12 @@ module GeoRuby
           "MULTIPOINT" => method(:parse_multi_point),
           "MULTILINESTRING" => method(:parse_multi_line_string),
           "MULTIPOLYGON" => method(:parse_multi_polygon),
-          "GEOMETRYCOLLECTION" => method(:parse_geometry_collection)
+          "GEOMETRYCOLLECTION" => method(:parse_geometry_collection),
+          "CIRCULARSTRING" => method(:parse_circular_string),
+          "COMPOUNDCURVE" => method(:parse_compound_curve),
+          "CURVEPOLYGON" => method(:parse_curve_polygon),
+          "MULTICURVE" => method(:parse_multi_curve),
+          "MULTISURFACE" => method(:parse_multi_surface)
         }
       end
 
@@ -285,6 +295,110 @@ module GeoRuby
             end
           end
         end
+      end
+      
+      def parse_circular_string
+        if @tokenizer_structure.get_next_token !='('
+          raise EWKTFormatError.new('Invalid Circular String')
+        end
+
+        parse_point_list(SqlMM::CircularString)
+      end
+      
+      def parse_compound_curve
+        if @tokenizer_structure.get_next_token !='('
+          raise EWKTFormatError.new('Invalid CompoundCurve')
+        end
+
+        @factory.begin_geometry(SqlMM::CompoundCurve,@srid)
+
+        token = ''
+        while token != ')'
+          token = @tokenizer_structure.check_next_token
+          if token == '('
+            parse_line_string
+          else
+            parse_geometry(false)
+          end
+          token = @tokenizer_structure.get_next_token
+          if token.nil?
+            raise EWKTFormatError.new("EWKT string not correctly terminated")
+          end
+        end
+
+        @factory.end_geometry(@with_z,@with_m)
+      end
+      
+      def parse_curve_polygon
+        if @tokenizer_structure.get_next_token !='('
+          raise EWKTFormatError.new('Invalid CurvePolygon')
+        end
+
+        @factory.begin_geometry(SqlMM::CurvePolygon,@srid)
+
+        token = ''
+        while token != ')'
+          token = @tokenizer_structure.check_next_token
+          if token == '('
+            parse_line_string
+          else
+            parse_geometry(false)
+          end
+          token = @tokenizer_structure.get_next_token
+          if token.nil?
+            raise EWKTFormatError.new("EWKT string not correctly terminated")
+          end
+        end
+
+        @factory.end_geometry(@with_z,@with_m)
+      end
+      
+      def parse_multi_curve
+        if @tokenizer_structure.get_next_token !='('
+          raise EWKTFormatError.new('Invalid MultiCurve')
+        end
+
+        @factory.begin_geometry(SqlMM::MultiCurve,@srid)
+
+        token = ''
+        while token != ')'
+          token = @tokenizer_structure.check_next_token
+          if token == '('
+            parse_line_string
+          else
+            parse_geometry(false)
+          end
+          token = @tokenizer_structure.get_next_token
+          if token.nil?
+            raise EWKTFormatError.new("EWKT string not correctly terminated")
+          end
+        end
+
+        @factory.end_geometry(@with_z,@with_m)
+      end
+      
+      def parse_multi_surface
+        if @tokenizer_structure.get_next_token !='('
+          raise EWKTFormatError.new('Invalid MultiSurface')
+        end
+
+        @factory.begin_geometry(SqlMM::MultiSurface,@srid)
+
+        token = ''
+        while token != ')'
+          token = @tokenizer_structure.check_next_token
+          if token == '('
+            parse_polygon
+          else
+            parse_geometry(false)
+          end
+          token = @tokenizer_structure.get_next_token
+          if token.nil?
+            raise EWKTFormatError.new("EWKT string not correctly terminated")
+          end
+        end
+
+        @factory.end_geometry(@with_z,@with_m)
       end
     end
 
