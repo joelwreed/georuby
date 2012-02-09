@@ -11,9 +11,8 @@ module GeoRuby
         super(srid)
       end
 
-      #TODO
       def binary_geometry_type #:nodoc:
-        5
+        14
       end
 
       #Text representation of a multi line string

@@ -12,17 +12,15 @@ module GeoRuby
       end
 
       #binary representation of a polygon, without the headers neccessary for a valid WKB string
-      #TODO
       def binary_representation(allow_z=true,allow_m=true)
         rep = [length].pack("V")
-        each {|linear_ring| rep << linear_ring.binary_representation(allow_z,allow_m)}
+        each {|linear_ring| rep << linear_ring.as_ewkb(false,allow_z,allow_m)}
         rep
       end
 
       #WKB geometry type
-      #TODO
       def binary_geometry_type
-        3
+        13
       end
 
       #Text representation of a polygon

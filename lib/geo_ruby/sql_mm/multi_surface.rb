@@ -11,9 +11,8 @@ module GeoRuby
         super(srid)
       end
 
-      #TODO
       def binary_geometry_type #:nodoc:
-        6
+        15
       end
 
       #Text representation of a MultiPolygon

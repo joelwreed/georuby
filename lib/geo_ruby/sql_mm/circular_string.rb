@@ -8,18 +8,9 @@ module GeoRuby
         super(srid,with_z,with_m)
       end
 
-      #Binary representation of a line string
-      #TODO
-      def binary_representation(allow_z=true,allow_m=true) #:nodoc:
-        rep = [length].pack("V")
-        each {|point| rep << point.binary_representation(allow_z,allow_m) }
-        rep
-      end
-
       #WKB geometry type
-      #TODO
       def binary_geometry_type #:nodoc:
-        2
+        8
       end
 
       #WKT geometry type

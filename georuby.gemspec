@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{georuby}
-  s.version = "1.9.3.1"
+  s.version = "1.9.3.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = [%q{Guilhem Vellut}, %q{Marcos Piccinini}, %q{Marcus Mateus}, %q{Doug Cole}, %q{Bob Matcuk}]

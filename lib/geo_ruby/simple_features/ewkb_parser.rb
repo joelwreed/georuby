@@ -77,6 +77,16 @@ module GeoRuby
           parse_multi_polygon
         when 7
           parse_geometry_collection
+        when 8
+          parse_circular_string
+        when 9
+          parse_compound_curve
+        when 13
+          parse_curve_polygon
+        when 14
+          parse_multi_curve
+        when 15
+          parse_multi_surface
         else
           raise EWKBFormatError::new("Unknown geometry type")
         end
@@ -146,6 +156,26 @@ module GeoRuby
         end
 
         @factory.end_geometry(@with_z,@with_m)
+      end
+      
+      def parse_circular_string
+        parse_point_list(SqlMM::CircularString)
+      end
+      
+      def parse_compound_curve
+        parse_multi_geometries(SqlMM::CompoundCurve)
+      end
+      
+      def parse_curve_polygon
+        parse_multi_geometries(SqlMM::CurvePolygon)
+      end
+      
+      def parse_multi_curve
+        parse_multi_geometries(SqlMM::MultiCurve)
+      end
+      
+      def parse_multi_surface
+        parse_multi_geometries(SqlMM::MultiSurface)
       end
     end
 
