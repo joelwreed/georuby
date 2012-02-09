@@ -15,6 +15,11 @@ require 'geo_ruby/simple_features/multi_polygon'
 require 'geo_ruby/simple_features/geometry_collection'
 require 'geo_ruby/simple_features/envelope'
 require 'geo_ruby/simple_features/geometry_factory'
+require 'geo_ruby/sql_mm/circular_string'
+require 'geo_ruby/sql_mm/compound_curve'
+require 'geo_ruby/sql_mm/curve_polygon'
+require 'geo_ruby/sql_mm/multi_curve'
+require 'geo_ruby/sql_mm/multi_surface'
 
 # Require if you need
 # require 'geo_ruby/shp4r/shp'
