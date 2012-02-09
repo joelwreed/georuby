@@ -16,6 +16,17 @@ module GeoRuby
         5
       end
 
+      #Text representation of a multi line string
+      def text_representation(allow_z=true,allow_m=true) #:nodoc:
+        @geometries.collect do |line_string|
+          if line_string.class.name =~ /^GeoRuby::SqlMM/
+            line_string.as_ewkt(false, allow_z, allow_m)
+          else
+            "(" + line_string.text_representation(allow_z,allow_m) + ")"
+          end
+        end.join(",")
+      end
+
       #WKT geometry type
       def text_geometry_type #:nodoc:
         "MULTICURVE"

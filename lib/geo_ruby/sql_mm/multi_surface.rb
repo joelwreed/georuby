@@ -16,6 +16,17 @@ module GeoRuby
         6
       end
 
+      #Text representation of a MultiPolygon
+      def text_representation(allow_z=true,allow_m=true) #:nodoc:
+        @geometries.map do |polygon|
+          if polygon.class.name =~ /^GeoRuby::SqlMM/
+            polygon.as_ewkt(false, allow_z, allow_m)
+          else
+            "(" + polygon.text_representation(allow_z,allow_m) + ")"
+          end
+        end.join(",")
+      end
+
       #WKT geometry type
       def text_geometry_type #:nodoc:
         "MULTISURFACE"

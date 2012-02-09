@@ -25,6 +25,17 @@ module GeoRuby
         3
       end
 
+      #Text representation of a polygon
+      def text_representation(allow_z=true,allow_m=true)
+        @rings.collect do |line_string|
+          if line_string.class.name =~ /^GeoRuby::SqlMM/
+            line_string.as_ewkt(false, allow_z, allow_m)
+          else
+            "(" + line_string.text_representation(allow_z,allow_m) + ")"
+          end
+        end.join(",")
+      end
+
       #WKT geometry type
       def text_geometry_type
         "CURVEPOLYGON"
