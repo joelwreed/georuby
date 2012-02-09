@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{georuby}
-  s.version = "1.9.3.2"
+  s.version = "1.9.3.3"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = [%q{Guilhem Vellut}, %q{Marcos Piccinini}, %q{Marcus Mateus}, %q{Doug Cole}, %q{Bob Matcuk}]
@@ -52,7 +52,6 @@ Gem::Specification.new do |s|
     "lib/geo_ruby/sql_mm/curve_polygon.rb",
     "lib/geo_ruby/sql_mm/multi_curve.rb",
     "lib/geo_ruby/sql_mm/multi_surface.rb",
-    "nofxx-georuby.gemspec",
     "spec/data/geojson/feature_collection.json",
     "spec/data/georss/atom.xml",
     "spec/data/georss/gml.xml",
