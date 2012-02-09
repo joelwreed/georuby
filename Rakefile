@@ -5,10 +5,10 @@ begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
     gem.name = "georuby"
-    gem.summary = "Ruby data holder for OGC Simple Features"
-    gem.description = "GeoRuby provides geometric data types from the OGC 'Simple Features' specification."
-    gem.email = "georuby@simplitex.com"
-    gem.homepage = "http://github.com/nofxx/georuby"
+    gem.summary = "Ruby data holder for OGC Simple Features, plus SQL-MM."
+    gem.description = "GeoRuby provides geometric data types from the OGC 'Simple Features' specification plus the SQL-MM specification."
+    gem.email = "bmatcuk@gmail.com"
+    gem.homepage = "http://github.com/bmatcuk/georuby"
     gem.authors = ["Guilhem Vellut", "Marcos Piccinini", "Marcus Mateus", "Doug Cole", "Bob Matcuk"]
     gem.add_development_dependency "rspec", ">= 2.0.0"
     gem.add_development_dependency "dbf", ">= 1.2.9"

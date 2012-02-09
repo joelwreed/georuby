@@ -5,13 +5,13 @@
 
 Gem::Specification.new do |s|
   s.name = %q{georuby}
-  s.version = "1.9.3"
+  s.version = "1.9.3.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
-  s.authors = ["Guilhem Vellut", "Marcos Piccinini", "Marcus Mateus", "Doug Cole"]
-  s.date = %q{2011-06-30}
-  s.description = %q{GeoRuby provides geometric data types from the OGC 'Simple Features' specification.}
-  s.email = %q{georuby@simplitex.com}
+  s.authors = [%q{Guilhem Vellut}, %q{Marcos Piccinini}, %q{Marcus Mateus}, %q{Doug Cole}, %q{Bob Matcuk}]
+  s.date = %q{2012-02-09}
+  s.description = %q{GeoRuby provides geometric data types from the OGC 'Simple Features' specification plus the SQL-MM specification.}
+  s.email = %q{bmatcuk@gmail.com}
   s.extra_rdoc_files = [
     "LICENSE",
     "README.rdoc"
@@ -47,6 +47,11 @@ Gem::Specification.new do |s|
     "lib/geo_ruby/simple_features/multi_polygon.rb",
     "lib/geo_ruby/simple_features/point.rb",
     "lib/geo_ruby/simple_features/polygon.rb",
+    "lib/geo_ruby/sql_mm/circular_string.rb",
+    "lib/geo_ruby/sql_mm/compound_curve.rb",
+    "lib/geo_ruby/sql_mm/curve_polygon.rb",
+    "lib/geo_ruby/sql_mm/multi_curve.rb",
+    "lib/geo_ruby/sql_mm/multi_surface.rb",
     "nofxx-georuby.gemspec",
     "spec/data/geojson/feature_collection.json",
     "spec/data/georss/atom.xml",
@@ -92,13 +97,12 @@ Gem::Specification.new do |s|
     "spec/geo_ruby_spec.rb",
     "spec/spec_helper.rb"
   ]
-  s.homepage = %q{http://github.com/nofxx/georuby}
-  s.require_paths = ["lib"]
-  s.rubygems_version = %q{1.3.7}
-  s.summary = %q{Ruby data holder for OGC Simple Features}
+  s.homepage = %q{http://github.com/bmatcuk/georuby}
+  s.require_paths = [%q{lib}]
+  s.rubygems_version = %q{1.8.6}
+  s.summary = %q{Ruby data holder for OGC Simple Features, plus SQL-MM.}
 
   if s.respond_to? :specification_version then
-    current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
     s.specification_version = 3
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
